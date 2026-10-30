@@ -4,6 +4,12 @@ import { supabase } from './supabase';
 import { usePersist, REGISTRO, estadoSync, escucharEstado, cargar, sembrar, tiempoReal, detener } from './datos';
 import { LOGO_SRC } from './logo';
 
+/* Valores de la versión con base de datos (van arriba: se usan desde el inicio) */
+let REPARTIDOR = 'Repartidor';
+let QR_BANCO = null;
+const BASE_URL = (() => { try { return location.origin + location.pathname; } catch (e) { return '/'; } })();
+const nuevoId = () => { try { return crypto.randomUUID(); } catch (e) { return 'x' + Date.now() + Math.random().toString(16).slice(2); } };
+
 /* ============ Datos de ejemplo (menú de notasdecafe) ============ */
 let CATEGORIAS = [
   { id:'cafe', nombre:'Café' },
@@ -4971,10 +4977,6 @@ function Campana({ incidencias, ir, atenderLlamada, llamadas }) {
 /* ============================================================================
    Versión con base de datos (Supabase)
    ============================================================================ */
-let REPARTIDOR = 'Repartidor';
-let QR_BANCO = null;
-const BASE_URL = (() => { try { return location.origin + location.pathname; } catch (e) { return '/'; } })();
-const nuevoId = () => { try { return crypto.randomUUID(); } catch (e) { return 'x' + Date.now() + Math.random().toString(16).slice(2); } };
 const CAJA_VACIA = { abierta:false, apertura:0, por:'', hora:'', tickets:0, descuentos:0, ultimo:null, ventas:{ efectivo:0, qr:0, tarjeta:0 }, propinas:{ efectivo:0, qr:0, tarjeta:0 }, movs:[] };
 
 /* Datos con los que nace la base del negocio (la ficha de Notas de Café, sin ventas de ejemplo). */

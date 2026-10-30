@@ -12,7 +12,7 @@
 insert into public.perfiles (id, email, rol, usuario_id, activo)
 select id, lower(email), 'dueno', 'u1', true
 from auth.users
-where lower(email) = lower('richard.rmontero@gmail.com')        -- ← CAMBIA ESTE CORREO
+where lower(email) = lower('tu-correo@ejemplo.com')        -- ← CAMBIA ESTE CORREO
 on conflict (id) do update set rol = 'dueno', activo = true, usuario_id = 'u1';
 
 -- Comprobación: debe aparecer una fila con tu correo y el rol "dueno".
